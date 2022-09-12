@@ -18,22 +18,22 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
   template_url = "https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml"
 }
 
-data "aws_lambda_function" "datadog_forwarder" {
-  function_name = "datadog-forwarder"
-  depends_on = [
-    aws_cloudformation_stack.datadog_forwarder
-  ]
-}
+# data "aws_lambda_function" "datadog_forwarder" {
+#   function_name = "datadog-forwarder"
+#   depends_on = [
+#     aws_cloudformation_stack.datadog_forwarder
+#   ]
+# }
 
-resource "datadog_integration_aws_lambda_arn" "datadog_forwarder" {
-  account_id = var.account_id
-  lambda_arn = data.aws_lambda_function.datadog_forwarder.arn
-}
+# resource "datadog_integration_aws_lambda_arn" "datadog_forwarder" {
+#   account_id = var.account_id
+#   lambda_arn = data.aws_lambda_function.datadog_forwarder.arn
+# }
 
-resource "datadog_integration_aws_log_collection" "log_collection" {
-  account_id = var.account_id
-  services   = var.datadog_integration_aws_log_collection
-  depends_on = [
-    datadog_integration_aws_lambda_arn.datadog_forwarder
-  ]
+# resource "datadog_integration_aws_log_collection" "log_collection" {
+#   account_id = var.account_id
+#   services   = var.datadog_integration_aws_log_collection
+#   depends_on = [
+#     datadog_integration_aws_lambda_arn.datadog_forwarder
+#   ]
 }
