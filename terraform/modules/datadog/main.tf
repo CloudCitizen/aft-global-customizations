@@ -36,4 +36,4 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 #   depends_on = [
 #     datadog_integration_aws_lambda_arn.datadog_forwarder
 #   ]
-}
+# }
