@@ -3,6 +3,12 @@
 
 {% if tf_distribution_type == "oss" -%}
 terraform {
+  required_providers {
+    datadog = {
+      source  = "DataDog/datadog"
+      version = "~> 3.10"
+    }
+  }
   required_version = ">= 0.15.1"
   backend "s3" {
     region         = "{{ region }}"
